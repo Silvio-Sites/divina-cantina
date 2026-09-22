@@ -25,7 +25,7 @@ import { useEffect, useMemo, useState, type ReactNode } from "react";
 const WHATSAPP_NUMBER = "5542998179252";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
 const INSTAGRAM_URL = "https://www.instagram.com/divinapizzatb/";
-const MAPS_URL = "https://www.google.com/maps/search/?api=1&query=R.+Carmo+da+Mata,+105,+Telemaco+Borba,+PR";
+const MAPS_URL = "https://www.google.com/maps/dir/?api=1&destination=R.%20Carmo%20da%20Mata%2C%20105%20-%20Jardim%20Alvorada%2C%20Tel%C3%AAmaco%20Borba%20-%20PR%2C%2084272-400";
 
 const images = {
   hero: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=1400&q=88",
