@@ -95,13 +95,13 @@ function CartDrawer({ cart, onClose, onChange, onRemove, onOrderSent }: { cart: 
 }
 
 export default function Home() {
+  const [catalog, setCatalog] = useState<Record<MenuCategory, MenuItem[]>>(() => { try { return JSON.parse(localStorage.getItem("granjinha_catalog") || "null") || menu; } catch { return menu; } }); const [activeTab, setActiveTab] = useState<MenuCategory>("espetos"); const [reservationOpen, setReservationOpen] = useState(false); const [cartOpen, setCartOpen] = useState(false); const [mobileOpen, setMobileOpen] = useState(false); const [cart, setCart] = useState<CartItem[]>([]);
+  const activeItems = catalog[activeTab]; const cartCount = useMemo(() => cart.reduce((sum, line) => sum + line.quantity, 0), [cart]);
   useEffect(() => {
     const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add("is-visible"); observer.unobserve(entry.target); } }), { threshold: 0.12 });
     document.querySelectorAll(".reveal-section, .reveal-item").forEach(element => observer.observe(element));
     return () => observer.disconnect();
-  }, []);
-  const [catalog, setCatalog] = useState<Record<MenuCategory, MenuItem[]>>(() => { try { return JSON.parse(localStorage.getItem("granjinha_catalog") || "null") || menu; } catch { return menu; } }); const [activeTab, setActiveTab] = useState<MenuCategory>("espetos"); const [reservationOpen, setReservationOpen] = useState(false); const [cartOpen, setCartOpen] = useState(false); const [mobileOpen, setMobileOpen] = useState(false); const [cart, setCart] = useState<CartItem[]>([]);
-  const activeItems = catalog[activeTab]; const cartCount = useMemo(() => cart.reduce((sum, line) => sum + line.quantity, 0), [cart]);
+  }, [activeTab]);
   const addToCart = (item: MenuItem) => setCart(current => current.some(line => line.item.id === item.id) ? current.map(line => line.item.id === item.id ? { ...line, quantity: line.quantity + 1 } : line) : [...current, { item, quantity: 1 }]);
   const changeCart = (id: string, delta: number) => setCart(current => current.flatMap(line => line.item.id === id ? (line.quantity + delta > 0 ? [{ ...line, quantity: line.quantity + delta }] : []) : [line]));
   const removeFromCart = (id: string) => setCart(current => current.filter(line => line.item.id !== id));
