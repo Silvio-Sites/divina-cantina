@@ -18,10 +18,10 @@ const WHATSAPP_URL = "https://wa.me/551146122262?text=Ol%C3%A1!%20Gostaria%20de%
 const MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Estrada+Fernando+Nobre+819+Cotia+SP";
 
 const images = {
-  hero: "https://files.manuscdn.com/search-media/310519663970320780/1C0qNxyMqO7oEL0KIIMoGF/p2mzm76ging9Fzwo6mVgmE.jpg",
-  feijoada: "https://files.manuscdn.com/search-media/310519663970320780/1C0qNxyMqO7oEL0KIIMoGF/jMAiCqoJvGwSQeBp6UvP9F.jpg",
-  fire: "https://files.manuscdn.com/search-media/310519663970320780/1C0qNxyMqO7oEL0KIIMoGF/bPumYvRcZqrcjhgxjh99LY.jpg",
-  interior: "https://files.manuscdn.com/search-media/310519663970320780/1C0qNxyMqO7oEL0KIIMoGF/fm2mhHECCVU45xAjJZvRN5.jpg",
+  logo: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663970320780/QGnXiqcqzYEmHPOX.png",
+  hero: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663970320780/FoVTNUIYKvAGyFta.jpg",
+  feijoada: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663970320780/TSLlUseylRqhrarq.jpg",
+  interior: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663970320780/qQXWTOYMoUwVKFoD.jpg",
 };
 
 type MenuItem = { name: string; description: string; price: string; tag?: string };
@@ -44,7 +44,7 @@ const menu: Record<string, MenuItem[]> = {
 };
 
 function Logo({ light = false }: { light?: boolean }) {
-  return <a className={`logo ${light ? "logo--light" : ""}`} href="#inicio" aria-label="Granjinha início"><span>GRANJINHA</span><small>ESPETO · BAR · RESTAURANTE</small></a>;
+  return <a className={`logo ${light ? "logo--light" : ""}`} href="#inicio" aria-label="Granjinha início"><img src={images.logo} alt="Granjinha Espeto, Bar e Restaurante" /></a>;
 }
 
 function Button({ children, href, onClick, variant = "primary" }: { children: ReactNode; href?: string; onClick?: () => void; variant?: "primary" | "outline" | "light" }) {
@@ -86,7 +86,7 @@ export default function Home() {
 
       <section className="menu-section" id="menu"><div className="container"><div className="section-heading"><div><span className="eyebrow">DA BRASA À MESA</span><h2>Para chegar com fome.<br /><em>E sair contando.</em></h2></div><p>Uma seleção do que faz a Granjinha ser a Granjinha. O cardápio muda com a estação e com a vontade da nossa cozinha.</p></div><div className="menu-tabs" role="tablist">{[["espetos", "Espetos & brasa"], ["favoritos", "Favoritos da casa"], ["drinks", "Bar & drinks"]].map(([id, label]) => <button key={id} className={activeTab === id ? "active" : ""} onClick={() => setActiveTab(id)}>{label}</button>)}</div><div className="menu-list">{menu[activeTab].map((item, index) => <article className="menu-item" key={item.name}><span className="menu-number">0{index + 1}</span><div><h3>{item.name} {item.tag && <small>{item.tag}</small>}</h3><p>{item.description}</p></div><strong>{item.price}</strong></article>)}</div><div className="menu-footer"><span>Consulte disponibilidade no dia</span><Button variant="outline" href={WHATSAPP_URL}>Falar com a equipe <ArrowRight size={15} /></Button></div></div></section>
 
-      <section className="agenda" id="agenda"><div className="container agenda-grid"><div className="agenda-copy"><span className="eyebrow eyebrow--light">A NOITE ACONTECE AQUI</span><h2>Tem sempre<br /><em>um motivo</em><br />para brindar.</h2><p>Quarta a domingo, a casa recebe bandas e artistas que deixam a brasa ainda mais acesa.</p><div className="agenda-row"><span>QUARTA</span><strong>Jazz & blues</strong><small>20h</small></div><div className="agenda-row"><span>SÁBADO</span><strong>Feijoada + samba</strong><small>13h</small></div><div className="agenda-row"><span>DOMINGO</span><strong>Rock na varanda</strong><small>19h</small></div><a className="light-link" href={WHATSAPP_URL}>Consultar agenda completa <ArrowRight size={15} /></a></div><div className="agenda-photo"><img src={images.interior} alt="Salão rústico da Granjinha com luzes" /><div className="agenda-photo-caption"><span>O palco é da casa.</span><strong>Você é nosso convidado.</strong></div></div></div></section>
+      <section className="agenda" id="agenda"><div className="container agenda-grid"><div className="agenda-copy"><span className="eyebrow eyebrow--light">A NOITE ACONTECE AQUI</span><h2>Tem sempre<br /><em>um motivo</em><br />para brindar.</h2><p>Quarta a domingo, a casa recebe bandas e artistas que deixam a brasa ainda mais acesa.</p><div className="agenda-row"><span>QUARTA</span><strong>Jazz & blues</strong><small>20h</small></div><div className="agenda-row"><span>SÁBADO</span><strong>Feijoada + samba</strong><small>13h</small></div><div className="agenda-row"><span>DOMINGO</span><strong>Rock na varanda</strong><small>19h</small></div><a className="light-link" href={WHATSAPP_URL}>Consultar agenda completa <ArrowRight size={15} /></a></div><div className="agenda-photo"><img src={images.interior} alt="Petiscos e cerveja servidos na Granjinha" /><div className="agenda-photo-caption"><span>O palco é da casa.</span><strong>Você é nosso convidado.</strong></div></div></div></section>
 
       <section className="visit" id="contato"><div className="container visit-grid"><div><span className="eyebrow">VENHA VIVER</span><h2>A mesa está<br /><em>posta.</em></h2><p>Estr. Fernando Nobre, 819<br />Parque Rincão · Cotia, SP</p><div className="visit-actions"><Button onClick={() => setReservationOpen(true)}>Reservar mesa <ArrowRight size={16} /></Button><a className="text-link" href={MAPS_URL}>Traçar rota <MapPin size={15} /></a></div></div><div className="visit-info"><div><span><Phone size={15} /> Telefone</span><a href="tel:+551146122262">(11) 4612-2262</a></div><div><span><Clock3 size={15} /> Horários</span><p>Qua a dom<br />11h — 23h</p></div><div><span><Users size={15} /> Capacidade</span><p>Famílias, grupos<br />e mesas grandes</p></div></div></div></section>
     </main>
